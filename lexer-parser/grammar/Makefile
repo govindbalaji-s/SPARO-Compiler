@@ -1,8 +1,8 @@
 ANTLR = java -jar $(ANTLR_JAR)
 ANTLR_OUT_DIR = ../java
 ANTLR_FLAGS = -no-listener -visitor -package $(PACKAGE)
-LEXER = sparo-lexer
-PARSER = sparo-parser
+LEXER = sparo_lexer
+PARSER = sparo_parser
 
 %: all
 
