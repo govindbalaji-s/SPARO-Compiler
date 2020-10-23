@@ -1,7 +1,7 @@
-grammar sparo_lexer;
+lexer grammar SparoLexer;
 
 // List of tokens
-/*tokens{
+tokens{
 	ERROR,
 	TYPEID,
 	OBJECTID,
@@ -60,7 +60,8 @@ grammar sparo_lexer;
 	NEW_SHARED,
 	VOID,
 	RETURN
-}*/
+}
+
 
 @members {
 
@@ -69,6 +70,7 @@ grammar sparo_lexer;
 		setText(errorString);
 		setType(ERROR);
 	}
+  
 
 	// Function to process strings
 	public void processString() {
@@ -122,7 +124,6 @@ grammar sparo_lexer;
 		}
 	}
 
-
 	public void unk_token() {
 		Token t = _factory.create(_tokenFactorySourcePair, _type, _text, _channel, _tokenStartCharIndex, getCharIndex()-1, _tokenStartLine, _tokenStartCharPositionInLine);
 		String text = t.getText();
@@ -142,7 +143,7 @@ INT_CONST	: ('-'?) [0-9]+;
 
 FLOAT_CONST	: ('-'?) [0-9]+ '.' [0-9]*;
 
-STR_CONST	: '"' (~[\nEOF"]|('\\''\n'))* '"' { processString(); };
+STRING_CONST	: '"' (~[\nEOF"]|('\\''\n'))* '"' { processString(); };
 
 
 /*
@@ -234,7 +235,7 @@ WS 		: [ \t\r\n]+ -> skip;
 SINGLE_COMMENT	: '##' .*? ('\n'|EOF) -> skip;
 
 UNMATCH_COM	: '*#' EOF? { reportError("Unmatched *#"); };
-EOF_COM		: '#*' (~['*#'|EOF])* (EOF) { reportError("EOF in comment"): };
+EOF_COM		: '#*' (~['*#'|EOF])* (EOF) { reportError("EOF in comment"); };
 
 MULTI_COMMENT	: '#*' (~['*#'|EOF])* '*#';
 

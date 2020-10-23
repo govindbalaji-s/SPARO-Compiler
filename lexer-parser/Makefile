@@ -1,6 +1,6 @@
 MAKE = make
 export ANTLR_JAR = /usr/local/lib/antlr-4.7.1-complete.jar
-export PACKAGE = parser.sparo
+export PACKAGE = sparo
 
 %: build
 

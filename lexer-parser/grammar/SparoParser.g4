@@ -1,6 +1,6 @@
-grammar sparo_parser;
+parser grammar SparoParser;
 
-import sparo_lexer;
+options {tokenVocab=SparoLexer;}
 
 program:
 class_definition_list? ;
