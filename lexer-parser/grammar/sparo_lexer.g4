@@ -9,10 +9,16 @@ tokens{
 	INT_CONST,
 	FLOAT_CONST,
 	STR_CONST,
+	INT,
+	FLOAT,
+	STRING,
+	BOOL,
+	ARRAY,
+	TENSOR,
 	LPAREN,
 	RPAREN,
 	COLON,
-	ATSYM,
+	AT,
 	SEMICOLON,
 	COMMA,
 	PLUS,
@@ -29,9 +35,9 @@ tokens{
 	LSQUARE,
 	RSQUARE,
 	DOT,
-	LE,
-	GE,
-	ASSIGN,
+	LTE,
+	GTE,
+	DOUBLE_EQUALS,
 	CLASS,
 	ELSE,
 	IF,
@@ -53,7 +59,6 @@ tokens{
 	NOT,
 	NEW_UNIQUE,
 	NEW_SHARED,
-	NEW_WEAK,
 	VOID,
 	ISVOID,
 	RETURN
@@ -135,49 +140,49 @@ tokens{
 
 BOOL_CONST  	: 'true' | 'false';
 
-INT_CONST		: ('-'?) [0-9]+;
+INT_CONST	: ('-'?) [0-9]+;
 
-FLOAT_CONST		: ('-'?) [0-9]+ '.' [0-9]*;
+FLOAT_CONST	: ('-'?) [0-9]+ '.' [0-9]*;
 
-STR_CONST		: '"' (~[\nEOF"]|('\\''\n'))* '"' { processString(); };
+STR_CONST	: '"' (~[\nEOF"]|('\\''\n'))* '"' { processString(); };
 
 
 /*
 	LEXER RULES FOR STRING ERRORS
 */
 
-STR_NULL		: '"' (~[\u0000]* ('\\u0000'))+ ~["\nEOF]* ["\nEOF] { reportError("String contains NULL character"); };
+STR_NULL	: '"' (~[\u0000]* ('\\u0000'))+ ~["\nEOF]* ["\nEOF] { reportError("String contains NULL character"); };
 STR_ERR_UNT 	: '"' (~[(EOF)"])* '"' { reportError("Unterminated string constant"); };
-STR_ERR_EOF		: '"' (~[(EOF)"])* (EOF) { reportError("EOF in string constant"); };
+STR_ERR_EOF	: '"' (~[(EOF)"])* (EOF) { reportError("EOF in string constant"); };
 
 
 /*
 	LEXER RULES FOR CHARACTERS
 */
 
-LPAREN			: '(';
-RPAREN			: ')';
-COLON			: ':';
-ATSYM			: '@';
-PERCENT			: '%';
+LPAREN		: '(';
+RPAREN		: ')';
+COLON		: ':';
+AT		: '@';
+PERCENT		: '%';
 SEMICOLON   	: ';';
-COMMA			: ',';
-PLUS			: '+';
-MINUS			: '-';
+COMMA		: ',';
+PLUS		: '+';
+MINUS		: '-';
 STAR        	: '*';
-SLASH			: '/';
-TILDE			: '~';
+SLASH		: '/';
+TILDE		: '~';
 LT          	: '<';
-GT				: '>';
-EQUALS			: '==';
-LBRACE			: '{';
-RBRACE			: '}';
-LSQUARE			: '[';
-RSQUARE			: ']';
-DOT				: '.';
-LE          	: '<=';
-GE				: '>=';
-ASSIGN			: '=';
+GT		: '>';
+EQUALS		: '=';
+LBRACE		: '{';
+RBRACE		: '}';
+LSQUARE		: '[';
+RSQUARE		: ']';
+DOT		: '.';
+LTE          	: '<=';
+GTE		: '>=';
+DOUBLE_EQUALS	: '==';
 
 
 /*
@@ -187,38 +192,43 @@ ASSIGN			: '=';
 CLASS			: 'class';
 ELSE			: 'else';
 IF				: 'if';
-EXTENDS			: 'extends';
-AFTER			: 'after';
-UNIQUE			: 'unique';
-SHARED			: 'shared';
-WEAK			: 'weak';
-CONSTRUCT		: 'construct';
-DESTRUCT		: 'destruct';
-THIS			: 'this';
-NULLPTR			: 'nullptr';
-WHILE			: 'while';
-FOR				: 'for';
-BREAK			: 'break';
-NEW				: 'new';
-AND				: 'and';
-OR				: 'or';
-NOT				: 'not';
-NEW_UNIQUE		: 'new_unique';
-NEW_SHARED		: 'new_shared';
-NEW_WEAK		: 'new_weak';
-VOID			: 'void';
-ISVOID			: 'isvoid';
-RETURN			: 'return';
+EXTENDS		: 'extends';
+AFTER		: 'after';
+UNIQUE		: 'unique';
+SHARED		: 'shared';
+WEAK		: 'weak';
+CONSTRUCT	: 'construct';
+DESTRUCT	: 'destruct';
+THIS		: 'this';
+NULLPTR		: 'nullptr';
+WHILE		: 'while';
+FOR		: 'for';
+BREAK		: 'break';
+NEW		: 'new';
+AND		: 'and';
+OR		: 'or';
+NOT		: 'not';
+NEW_UNIQUE	: 'new_unique';
+NEW_SHARED	: 'new_shared';
+VOID		: 'void';
+ISVOID		: 'isvoid';
+RETURN		: 'return';
 
 
 /*
 	LEXER RULES FOR IDENTIFIERS
 */
+INT		: 'Int';
+FLOAT		: 'Float';
+BOOL		: 'Bool';
+STRING		: 'String';
+ARRAY		: 'Array';
+TENSOR		: 'Tensor';
 
-OBJECTID		: [a-z][a-zA-Z0-9_]*;
-TYPEID			: [A-Z][a-zA-Z0-9_]*;
+OBJECTID	: [a-z][a-zA-Z0-9_]*;
+TYPEID		: [A-Z][a-zA-Z0-9_]*;
 
-WS 				: [ \t\r\n]+ -> skip;
+WS 		: [ \t\r\n]+ -> skip;
 
 
 /*
@@ -227,8 +237,8 @@ WS 				: [ \t\r\n]+ -> skip;
 
 SINGLE_COMMENT	: '##' .*? ('\n'|EOF) -> skip;
 
-UNMATCH_COM		: '*#' EOF? { reportError("Unmatched *#"); };
-EOF_COM			: '#*' (~['*#'|EOF])* (EOF) { reportError("EOF in comment"): };
+UNMATCH_COM	: '*#' EOF? { reportError("Unmatched *#"); };
+EOF_COM		: '#*' (~['*#'|EOF])* (EOF) { reportError("EOF in comment"): };
 
 MULTI_COMMENT	: '#*' (~['*#'|EOF])* '*#';
 
@@ -237,4 +247,4 @@ MULTI_COMMENT	: '#*' (~['*#'|EOF])* '*#';
 	LEXER RULES FOR UNKNOWN CHARACTERS
 */
 
-UNKNOWN 		: . { unk_token(); };
+UNKNOWN 	: . { unk_token(); };
