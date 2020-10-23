@@ -23,7 +23,7 @@ member_list:
 | member_list member;
 
 member:
-  declaration
+  member_declaration
 | constructor
 | destructor
 | method_definition;
@@ -35,7 +35,7 @@ constructor:
   CONSTRUCT LPAREN parameter_declaration_list? RPAREN AFTER LPAREN expression_list? RPAREN compound_statement;
 
 method_definition:
-  declaration_specifier OBJECTID LPAREN parameter_declaration_list RPAREN compound_statement;
+  declaration_specifier OBJECTID LPAREN parameter_declaration_list? RPAREN compound_statement;
 
 parameter_declaration_list:
   parameter_declaration
@@ -53,10 +53,13 @@ statement :
 | jump_statement SEMICOLON;
 
 declaration :
-  declaration_specifier init_declarator SEMICOLON;
+  declaration_specifier init_declarator;
+
+member_declaration:
+  declaration_specifier OBJECTID;
 
 declaration_specifier:
-  pointer_type? type_specifier SEMICOLON;
+  pointer_type? type_specifier;
 
 type_specifier:
   INT
