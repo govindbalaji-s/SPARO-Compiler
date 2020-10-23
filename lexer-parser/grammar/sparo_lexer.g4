@@ -1,7 +1,7 @@
 grammar sparo_lexer;
 
 // List of tokens
-tokens{
+/*tokens{
 	ERROR,
 	TYPEID,
 	OBJECTID,
@@ -26,7 +26,6 @@ tokens{
 	STAR,
 	SLASH,
 	PERCENT,
-	TILDE,
 	LT,
 	GT,
 	EQUALS,
@@ -60,9 +59,8 @@ tokens{
 	NEW_UNIQUE,
 	NEW_SHARED,
 	VOID,
-	ISVOID,
 	RETURN
-}
+}*/
 
 @members {
 
@@ -171,7 +169,6 @@ PLUS		: '+';
 MINUS		: '-';
 STAR        	: '*';
 SLASH		: '/';
-TILDE		: '~';
 LT          	: '<';
 GT		: '>';
 EQUALS		: '=';
@@ -211,7 +208,6 @@ NOT		: 'not';
 NEW_UNIQUE	: 'new_unique';
 NEW_SHARED	: 'new_shared';
 VOID		: 'void';
-ISVOID		: 'isvoid';
 RETURN		: 'return';
 
 

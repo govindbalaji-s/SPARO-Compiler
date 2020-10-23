@@ -2,63 +2,6 @@ grammar sparo_parser;
 
 import sparo_lexer;
 
-tokens {
-LBRACE,
-RBRACE,
-SEMICOLON,
-CLASS,
-EXTENDS,
-DESTRUCT,
-CONSTRUCT,
-LPAREN,
-RPAREN,
-AFTER,
-COMMA,
-INT,
-FLOAT,
-BOOL,
-STRING,
-ARRAY,
-TENSOR,
-UNIQUE,
-SHARED,
-WEAK,
-EQUALS,
-OR,
-AND,
-DOUBLE_EQUALS,
-LT,
-GT,
-LTE,
-GTE,
-PLUS,
-MINUS,
-STAR,
-AT,
-SLASH,
-PERCENT,
-NOT,
-NEW_UNIQUE,
-NEW_SHARED,
-LSQUARE,
-RSQUARE,
-DOT,
-THIS,
-NULLPTR,
-IF,
-ELSE,
-WHILE,
-FOR,
-BREAK,
-RETURN,
-OBJECTID,
-TYPEID,
-INT_CONST,
-BOOL_CONST,
-STRING_CONST,
-FLOAT_CONST
-}
-
 program:
 class_definition_list? ;
 
@@ -141,7 +84,7 @@ pointer_type:
 
 init_declarator:
   OBJECTID
-| OBJECTID = expression;
+| OBJECTID EQUALS expression;
 
 expression_statement:
   expression?;
@@ -183,7 +126,8 @@ additive_expression:
 | additive_expression MINUS multiplicative_expression;
 
 multiplicative_expression:
-  multiplicative_expression STAR unary_expression
+  unary_expression
+| multiplicative_expression STAR unary_expression
 | multiplicative_expression AT unary_expression
 | multiplicative_expression SLASH unary_expression
 | multiplicative_expression PERCENT unary_expression;
