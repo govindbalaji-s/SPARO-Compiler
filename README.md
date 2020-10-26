@@ -19,3 +19,14 @@ To add a new test case or update the saved correct output:
 $ cd lexer-parser/test
 $ ./add-test.sh ../../Sample_programs/file.sp
 ```
+
+To see the output of lexer on a particular file:
+```
+$ cd lexer-parser/test
+./lexer.sh ../../Sample_programs/file.sp
+```
+To see the output of parser(gui) on a particular file:
+```
+$ cd lexer-parser/test
+$ java -Xmx500M -cp "/usr/local/lib/antlr-4.7.1-complete.jar:../java" org.antlr.v4.gui.TestRig sparo.Sparo program -gui ../../Sample_programs/file.sp
+```
