@@ -11,6 +11,7 @@ class Main{
         Int e;
  
         e = a - c + b * c / a % d;     
+        d = c = e;
         "Value of e = ".put();
         e.put();
         "\n".put();
@@ -32,4 +33,4 @@ class Main{
 
         return 0; 
     }
-}
+};

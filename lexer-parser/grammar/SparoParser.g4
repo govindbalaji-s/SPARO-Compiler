@@ -66,6 +66,7 @@ type_specifier:
 | FLOAT
 | BOOL
 | STRING
+| VOID
 | array_specifier
 | tensor_specifier 
 | TYPEID;

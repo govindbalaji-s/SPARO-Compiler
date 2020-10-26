@@ -1,6 +1,6 @@
 #name "alm.sp"
-#1 WHILE
+#1 CLASS
 #1 TYPEID Main
-#1 FI
-#2 IF
-#2 '<'
+#1 LBRACE
+#2 RBRACE
+#2 SEMICOLON

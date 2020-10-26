@@ -1,12 +1,12 @@
 #name "alm2.sp"
-#1 WHILE
+#1 CLASS
 #1 TYPEID Main
-#1 FI
-#2 ')'
+#1 LBRACE
+#2 INT
 #2 OBJECTID main
-#2 '-'
-#2 '*'
-#2 FI
-#3 IF
-#4 IF
-#4 '<'
+#2 LPAREN
+#2 RPAREN
+#2 LBRACE
+#3 RBRACE
+#4 RBRACE
+#4 SEMICOLON
