@@ -275,6 +275,12 @@ public interface SparoParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitIteration_statement(SparoParser.Iteration_statementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link SparoParser#for_initializer}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFor_initializer(SparoParser.For_initializerContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link SparoParser#jump_statement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

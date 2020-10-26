@@ -23,7 +23,7 @@ member_list:
 | member_list member;
 
 member:
-  member_declaration
+  member_declaration SEMICOLON
 | constructor
 | destructor
 | method_definition;
@@ -142,12 +142,12 @@ multiplicative_expression:
 
 unary_expression:
   postfix_expression
+| new_expression
 | unary_operator unary_expression;
 
 unary_operator:
   MINUS
-| NOT
-| new_expression;
+| NOT;
 
 new_expression:
   new_keyword type_specifier LPAREN expression_list? RPAREN;
@@ -189,7 +189,11 @@ selection_statement:
 
 iteration_statement:
   WHILE LPAREN expression RPAREN compound_statement
-| FOR LPAREN expression? SEMICOLON expression SEMICOLON expression? RPAREN compound_statement;
+| FOR LPAREN for_initializer? SEMICOLON expression SEMICOLON expression? RPAREN compound_statement;
+
+for_initializer:
+  declaration
+| expression;
 
 jump_statement:
   BREAK

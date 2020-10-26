@@ -1,63 +1,62 @@
 #name "trivial1.sp"
-#3 WHILE
+#3 CLASS
 #3 TYPEID Main
-#3 FI
-#5 ')'
+#3 LBRACE
+#5 INT
 #5 OBJECTID main
-#5 '-'
-#5 '*'
-#5 FI
-#7 ')'
+#5 LPAREN
+#5 RPAREN
+#5 LBRACE
+#7 INT
 #7 OBJECTID x
-#7 ELSE
+#7 EQUALS
 #7 INT_CONST 0
-#7 '<'
-#8 ')'
+#7 SEMICOLON
+#8 INT
 #8 OBJECTID y
-#8 ELSE
+#8 EQUALS
 #8 INT_CONST 9
-#8 '<'
-#9 ')'
+#8 SEMICOLON
+#9 INT
 #9 OBJECTID z
-#9 ELSE
+#9 EQUALS
 #9 OBJECTID x
-#9 '{'
+#9 PLUS
 #9 OBJECTID y
-#9 '<'
-Invalid Token generated - Token id : 59 for text ""Is this the correct way writing to stdout??""
-#10 LET
+#9 SEMICOLON
+#10 STRING_CONST
+#10 DOT
 #10 OBJECTID put
-#10 '-'
-#10 '*'
-#10 '<'
-#11 '-'
-Invalid Token generated - Token id : 59 for text ""The sum is = ""
-#11 '*'
-#11 LET
+#10 LPAREN
+#10 RPAREN
+#10 SEMICOLON
+#11 LPAREN
+#11 STRING_CONST
+#11 RPAREN
+#11 DOT
 #11 OBJECTID put
-#11 '-'
-#11 '*'
-#11 '<'
-#12 '-'
+#11 LPAREN
+#11 RPAREN
+#11 SEMICOLON
+#12 LPAREN
 #12 OBJECTID x
-#12 '{'
+#12 PLUS
 #12 OBJECTID y
-#12 '*'
-#12 LET
+#12 RPAREN
+#12 DOT
 #12 OBJECTID put
-#12 '-'
-#12 '*'
-#12 '<'
-Invalid Token generated - Token id : 59 for text ""
-""
-#13 LET
+#12 LPAREN
+#12 RPAREN
+#12 SEMICOLON
+#13 STRING_CONST
+#13 DOT
 #13 OBJECTID put
-#13 '-'
-#13 '*'
-#13 '<'
-Invalid Token generated - Token id : 58 for text "return"
+#13 LPAREN
+#13 RPAREN
+#13 SEMICOLON
+#15 RETURN
 #15 INT_CONST 0
-#15 '<'
-#16 IF
-#17 IF
-#17 '<'
+#15 SEMICOLON
+#16 RBRACE
+#17 RBRACE
+#17 SEMICOLON

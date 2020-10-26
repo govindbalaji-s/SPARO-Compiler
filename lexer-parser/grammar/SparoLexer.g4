@@ -143,16 +143,28 @@ INT_CONST	: ('-'?) [0-9]+;
 
 FLOAT_CONST	: ('-'?) [0-9]+ '.' [0-9]*;
 
-STRING_CONST	: '"' (~[\nEOF"]|('\\''\n'))* '"' { processString(); };
+fragment STR_VALID: ('\\'~'\u0000' | ~["\n\u0000\\])*;
+fragment NULLSTR: '\u0000' | '\\\u0000';
+STRING_CONST	: '"' STR_VALID '"' { processString(); };
 
 
 /*
 	LEXER RULES FOR STRING ERRORS
 */
+STR_ERR     : '"' STR_VALID '\n'
+               {reportError("Unterminated string constant");}
 
-STR_NULL	: '"' (~[\u0000]* ('\\u0000'))+ ~["\nEOF]* ["\nEOF] { reportError("String contains NULL character"); };
-STR_ERR_UNT 	: '"' (~[(EOF)"])* '"' { reportError("Unterminated string constant"); };
-STR_ERR_EOF	: '"' (~[(EOF)"])* (EOF) { reportError("EOF in string constant"); };
+            | '"' STR_VALID '\u0000' (STR_VALID NULLSTR)* STR_VALID (["\n] | EOF)
+               {reportError("String contains null character.");}
+              
+            | '"' STR_VALID '\\\u0000' (STR_VALID NULLSTR)* STR_VALID (["\n] | EOF) 
+               {reportError("String contains escaped null character.");}
+
+            | '"' STR_VALID EOF
+              {reportError("EOF in string constant");}
+
+            | '"' STR_VALID '\\' EOF
+              {reportError("backslash at end of file");};
 
 
 /*
@@ -233,12 +245,10 @@ WS 		: [ \t\r\n]+ -> skip;
 */
 
 SINGLE_COMMENT	: '##' .*? ('\n'|EOF) -> skip;
+MULTI_COMMENT : '#*' .*? '*#' -> skip;
 
-UNMATCH_COM	: '*#' EOF? { reportError("Unmatched *#"); };
-EOF_COM		: '#*' (~['*#'|EOF])* (EOF) { reportError("EOF in comment"); };
-
-MULTI_COMMENT	: '#*' (~['*#'|EOF])* '*#';
-
+UNMATCH_COM	: '*#' {reportError("Unmatched *#"); };
+EOF_COM		: '#*' .*? EOF { reportError("EOF in comment"); };
 
 /*
 	LEXER RULES FOR UNKNOWN CHARACTERS
