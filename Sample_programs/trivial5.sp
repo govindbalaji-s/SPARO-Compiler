@@ -23,10 +23,12 @@ class Main{
         }
 
         ##What all types does '>' allow to compare? Does it return a bool type? Is the below comparison valid?
-        if (d > c > b > a)      
+        if (d > c > b > a){    
             "TRUE".put(); 
-        else
+        }
+        else{
             "FALSE".put(); 
+        }
 
         return 0; 
     }
