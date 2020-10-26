@@ -40,7 +40,7 @@ public class SparoParser extends Parser {
 		RULE_logical_OR_expression = 27, RULE_logical_AND_expression = 28, RULE_equality_expression = 29, 
 		RULE_relational_expression = 30, RULE_additive_expression = 31, RULE_multiplicative_expression = 32, 
 		RULE_unary_expression = 33, RULE_unary_operator = 34, RULE_new_expression = 35, 
-		RULE_new_keyword = 36, RULE_postfix_expression = 37, RULE_primary_expression = 38, 
+		RULE_new_keyword = 36, RULE_secondary_expression = 37, RULE_primary_expression = 38, 
 		RULE_constant = 39, RULE_compound_statement = 40, RULE_statement_list = 41, 
 		RULE_selection_statement = 42, RULE_iteration_statement = 43, RULE_for_initializer = 44, 
 		RULE_jump_statement = 45;
@@ -54,7 +54,7 @@ public class SparoParser extends Parser {
 		"assignment_expression", "logical_OR_expression", "logical_AND_expression", 
 		"equality_expression", "relational_expression", "additive_expression", 
 		"multiplicative_expression", "unary_expression", "unary_operator", "new_expression", 
-		"new_keyword", "postfix_expression", "primary_expression", "constant", 
+		"new_keyword", "secondary_expression", "primary_expression", "constant", 
 		"compound_statement", "statement_list", "selection_statement", "iteration_statement", 
 		"for_initializer", "jump_statement"
 	};
@@ -2329,8 +2329,8 @@ public class SparoParser extends Parser {
 	}
 
 	public static class Unary_expressionContext extends ParserRuleContext {
-		public Postfix_expressionContext postfix_expression() {
-			return getRuleContext(Postfix_expressionContext.class,0);
+		public Secondary_expressionContext secondary_expression() {
+			return getRuleContext(Secondary_expressionContext.class,0);
 		}
 		public New_expressionContext new_expression() {
 			return getRuleContext(New_expressionContext.class,0);
@@ -2370,7 +2370,7 @@ public class SparoParser extends Parser {
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(366);
-				postfix_expression(0);
+				secondary_expression(0);
 				}
 				break;
 			case NEW_UNIQUE:
@@ -2555,12 +2555,12 @@ public class SparoParser extends Parser {
 		return _localctx;
 	}
 
-	public static class Postfix_expressionContext extends ParserRuleContext {
+	public static class Secondary_expressionContext extends ParserRuleContext {
 		public Primary_expressionContext primary_expression() {
 			return getRuleContext(Primary_expressionContext.class,0);
 		}
-		public Postfix_expressionContext postfix_expression() {
-			return getRuleContext(Postfix_expressionContext.class,0);
+		public Secondary_expressionContext secondary_expression() {
+			return getRuleContext(Secondary_expressionContext.class,0);
 		}
 		public TerminalNode LSQUARE() { return getToken(SparoParser.LSQUARE, 0); }
 		public Expression_listContext expression_list() {
@@ -2571,28 +2571,28 @@ public class SparoParser extends Parser {
 		public TerminalNode RPAREN() { return getToken(SparoParser.RPAREN, 0); }
 		public TerminalNode DOT() { return getToken(SparoParser.DOT, 0); }
 		public TerminalNode OBJECTID() { return getToken(SparoParser.OBJECTID, 0); }
-		public Postfix_expressionContext(ParserRuleContext parent, int invokingState) {
+		public Secondary_expressionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_postfix_expression; }
+		@Override public int getRuleIndex() { return RULE_secondary_expression; }
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SparoParserVisitor ) return ((SparoParserVisitor<? extends T>)visitor).visitPostfix_expression(this);
+			if ( visitor instanceof SparoParserVisitor ) return ((SparoParserVisitor<? extends T>)visitor).visitSecondary_expression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final Postfix_expressionContext postfix_expression() throws RecognitionException {
-		return postfix_expression(0);
+	public final Secondary_expressionContext secondary_expression() throws RecognitionException {
+		return secondary_expression(0);
 	}
 
-	private Postfix_expressionContext postfix_expression(int _p) throws RecognitionException {
+	private Secondary_expressionContext secondary_expression(int _p) throws RecognitionException {
 		ParserRuleContext _parentctx = _ctx;
 		int _parentState = getState();
-		Postfix_expressionContext _localctx = new Postfix_expressionContext(_ctx, _parentState);
-		Postfix_expressionContext _prevctx = _localctx;
+		Secondary_expressionContext _localctx = new Secondary_expressionContext(_ctx, _parentState);
+		Secondary_expressionContext _prevctx = _localctx;
 		int _startState = 74;
-		enterRecursionRule(_localctx, 74, RULE_postfix_expression, _p);
+		enterRecursionRule(_localctx, 74, RULE_secondary_expression, _p);
 		int _la;
 		try {
 			int _alt;
@@ -2616,8 +2616,8 @@ public class SparoParser extends Parser {
 					switch ( getInterpreter().adaptivePredict(_input,33,_ctx) ) {
 					case 1:
 						{
-						_localctx = new Postfix_expressionContext(_parentctx, _parentState);
-						pushNewRecursionContext(_localctx, _startState, RULE_postfix_expression);
+						_localctx = new Secondary_expressionContext(_parentctx, _parentState);
+						pushNewRecursionContext(_localctx, _startState, RULE_secondary_expression);
 						setState(388);
 						if (!(precpred(_ctx, 3))) throw new FailedPredicateException(this, "precpred(_ctx, 3)");
 						setState(389);
@@ -2630,8 +2630,8 @@ public class SparoParser extends Parser {
 						break;
 					case 2:
 						{
-						_localctx = new Postfix_expressionContext(_parentctx, _parentState);
-						pushNewRecursionContext(_localctx, _startState, RULE_postfix_expression);
+						_localctx = new Secondary_expressionContext(_parentctx, _parentState);
+						pushNewRecursionContext(_localctx, _startState, RULE_secondary_expression);
 						setState(393);
 						if (!(precpred(_ctx, 2))) throw new FailedPredicateException(this, "precpred(_ctx, 2)");
 						setState(394);
@@ -2652,8 +2652,8 @@ public class SparoParser extends Parser {
 						break;
 					case 3:
 						{
-						_localctx = new Postfix_expressionContext(_parentctx, _parentState);
-						pushNewRecursionContext(_localctx, _startState, RULE_postfix_expression);
+						_localctx = new Secondary_expressionContext(_parentctx, _parentState);
+						pushNewRecursionContext(_localctx, _startState, RULE_secondary_expression);
 						setState(399);
 						if (!(precpred(_ctx, 1))) throw new FailedPredicateException(this, "precpred(_ctx, 1)");
 						setState(400);
@@ -3285,7 +3285,7 @@ public class SparoParser extends Parser {
 		case 32:
 			return multiplicative_expression_sempred((Multiplicative_expressionContext)_localctx, predIndex);
 		case 37:
-			return postfix_expression_sempred((Postfix_expressionContext)_localctx, predIndex);
+			return secondary_expression_sempred((Secondary_expressionContext)_localctx, predIndex);
 		case 41:
 			return statement_list_sempred((Statement_listContext)_localctx, predIndex);
 		}
@@ -3382,7 +3382,7 @@ public class SparoParser extends Parser {
 		}
 		return true;
 	}
-	private boolean postfix_expression_sempred(Postfix_expressionContext _localctx, int predIndex) {
+	private boolean secondary_expression_sempred(Secondary_expressionContext _localctx, int predIndex) {
 		switch (predIndex) {
 		case 18:
 			return precpred(_ctx, 3);

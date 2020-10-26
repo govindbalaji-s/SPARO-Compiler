@@ -6,16 +6,18 @@ class main {
     
     Tensor<5, 5, 3> test;                   ##test will be a tensor of null pointers (unique type).
 
-    Int main{
+    Int main(){
 
         test.initialize(0.0);               ##test tensor filled with zeros.
-        (Tensor<5, 5> A).initialize(1.0);   ##tensor 'A' initialized with all ones. **Is syntax fine??**
-        ##A = A*10;                         --elementise tensor multiplication with constant 10. **Is this allowed (i.e broadcasting)??**
+        Tensor<5, 5> A;
+        A = new Tensor<5, 5>();
+        A.initialize(1.0);
+        A = A*10;                           ## Type mismatch
 
         ##Or do we have to do it like this:
         for(Int i = 0; i < 5; i++){
             for(Int j = 0; j < 5; j++){
-                A[i][j] = A[i][j]*10.0;     ##Also, is multiplication of float with int valid? Can I write just '10'...?
+                A[i][j] = A[i][j]*10.0;     ##multiplication of float with int is invalid. cant be 10
             }
         }
 

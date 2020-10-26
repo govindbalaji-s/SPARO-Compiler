@@ -233,11 +233,11 @@ public interface SparoParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitNew_keyword(SparoParser.New_keywordContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SparoParser#postfix_expression}.
+	 * Visit a parse tree produced by {@link SparoParser#secondary_expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitPostfix_expression(SparoParser.Postfix_expressionContext ctx);
+	T visitSecondary_expression(SparoParser.Secondary_expressionContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link SparoParser#primary_expression}.
 	 * @param ctx the parse tree

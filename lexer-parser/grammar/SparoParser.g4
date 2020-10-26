@@ -141,7 +141,7 @@ multiplicative_expression:
 
 
 unary_expression:
-  postfix_expression
+  secondary_expression
 | new_expression
 | unary_operator unary_expression;
 
@@ -156,11 +156,11 @@ new_keyword:
   NEW_UNIQUE
 | NEW_SHARED;
 
-postfix_expression:
+secondary_expression:
   primary_expression
-| postfix_expression LSQUARE expression_list RSQUARE
-| postfix_expression LPAREN expression_list? RPAREN
-| postfix_expression DOT OBJECTID;
+| secondary_expression LSQUARE expression_list RSQUARE
+| secondary_expression LPAREN expression_list? RPAREN
+| secondary_expression DOT OBJECTID;
 
 primary_expression:
   THIS
