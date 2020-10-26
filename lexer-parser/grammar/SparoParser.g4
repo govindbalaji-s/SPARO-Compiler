@@ -97,6 +97,10 @@ expression_list:
 | expression_list COMMA expression;
 
 expression:
+  slice_expression;
+
+slice_expression:
+  assignment_expression? COLON assignment_expression?;
   assignment_expression;
 
 assignment_expression:
