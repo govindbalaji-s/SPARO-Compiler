@@ -250,7 +250,8 @@ SINGLE_COMMENT: '##' .*? ('\n'|EOF) -> skip;
 MULTI_COMMENT : '#*' .*? '*#' -> skip;
 
 UNMATCH_COM   : '*#' {reportError("Unmatched *#"); };
-EOF_COM       : '#*' .*? EOF { reportError("EOF in comment"); };
+EOF_COM       : '#*' (~'*'|'*'~'#')* EOF;
+//EOF_COM       : '#*' .*? EOF { reportError("EOF in comment"); };
 
 /*
 	LEXER RULES FOR UNKNOWN CHARACTERS
