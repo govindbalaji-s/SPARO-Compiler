@@ -161,6 +161,12 @@ public interface SparoParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExpression(SparoParser.ExpressionContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link SparoParser#slice_expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSlice_expression(SparoParser.Slice_expressionContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link SparoParser#assignment_expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

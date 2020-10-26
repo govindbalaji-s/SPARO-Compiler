@@ -1,0 +1,12 @@
+#name "alm2.sp"
+#1 WHILE
+#1 TYPEID Main
+#1 FI
+#2 ')'
+#2 OBJECTID main
+#2 '-'
+#2 '*'
+#2 FI
+#3 IF
+#4 IF
+#4 '<'

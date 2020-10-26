@@ -100,8 +100,8 @@ expression:
   slice_expression;
 
 slice_expression:
-  assignment_expression? COLON assignment_expression?;
-  assignment_expression;
+  assignment_expression? COLON assignment_expression?
+| assignment_expression;
 
 assignment_expression:
   logical_OR_expression

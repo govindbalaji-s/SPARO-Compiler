@@ -192,6 +192,13 @@ public class SparoParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitSlice_expression(SparoParser.Slice_expressionContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitAssignment_expression(SparoParser.Assignment_expressionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}

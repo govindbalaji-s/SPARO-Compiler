@@ -1,0 +1,1 @@
+(program (class_definition_list (class_definition (class_head class Main) { (member_list (member (method_definition (declaration_specifier (type_specifier Int)) main ( ) (compound_statement { })))) } ;)))

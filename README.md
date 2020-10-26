@@ -6,9 +6,16 @@ Install antlr-4.7.1-complete.jar into /usr/local/lib.
 $ cd lexer-parser
 $ make
 ```
-To test the lexer-parser on a file:
+To test the lexer-parser:
 ```
-$ alias grun='java -Xmx500M -cp "/usr/local/lib/antlr-4.7.1-complete.jar:$CLASSPATH" org.antlr.v4.gui.TestRig'
-$ cd lexer-parser/java
-$ grun sparo.Sparo program input-file.sp
+$ cd lexer-parser/test
+$ ./auto-lexer.sh
+$ ./auto-parser.sh
+```
+The above just runs diff for outputs of `Sample_programs/` against the outputs saved at `lexer-parser/test/lexer-ans/` or `lexer-parser/test/parser-ans`.
+
+To add a new test case or update the saved correct output:
+```
+$ cd lexer-parser/test
+$ ./add-test.sh ../../Sample_programs/file.sp
 ```
