@@ -17,7 +17,7 @@ import org.antlr.v4.runtime.RecognitionException;
 
 public class LexerTest {
 
-	static String[] TOKENS = {"ERROR", "TYPEID", "OBJECTID", "BOOL_CONST", "INT_CONST", "STR_CONST", "'('", "')'", "':'", "'@'", "';'", "','", "'+'", "'-'", "'*'", "'/'", "'~'", "'<'", "'='", "'{'", "'}'", "'.'", "DARROW", "LE", "ASSIGN", "CLASS", "ELSE", "FI", "IF", "IN", "INHERITS", "LET", "LOOP", "POOL", "THEN", "WHILE", "CASE", "ESAC", "OF", "NEW", "ISVOID", "NOT"
+	static String[] TOKENS = {"ERROR","TYPEID","OBJECTID","BOOL_CONST","INT_CONST","FLOAT_CONST","STRING_CONST","INT","FLOAT","STRING","BOOL","ARRAY","TENSOR","LPAREN","RPAREN","COLON","AT","SEMICOLON","COMMA","PLUS","MINUS","STAR","SLASH","PERCENT","LT","GT","EQUALS","LBRACE","RBRACE","LSQUARE","RSQUARE","DOT","LTE","GTE","DOUBLE_EQUALS","CLASS","ELSE","IF","EXTENDS","AFTER","UNIQUE","SHARED","WEAK","CONSTRUCT","DESTRUCT","THIS","NULLPTR","WHILE","FOR","BREAK","NEW","AND","OR","NOT","NEW_UNIQUE","NEW_SHARED","VOID","RETURN"
 	};
 
 	static int VALUED_INDEX_LIMIT = 6;
