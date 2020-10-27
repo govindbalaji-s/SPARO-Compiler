@@ -19,7 +19,7 @@ class Main {
 
     Int main(){
 
-        shared Array<Int, 10> arr;  ## 'arr' is of shared pointer type. The elements in 'arr' are all unique poniters (null_ptrs).  
+        shared Array<Int, 10> arr;  ## 'arr' is of shared pointer type. The elements in 'arr' are all unique pointers (null_ptrs).  
         ("Enter 10 integers :\n").put();
 
         for(Int i = 0; i < 10; i = i+1){
