@@ -9,7 +9,7 @@ class Base {
     }
     construct(Int a, Int b) after() {
       x = a;
-      y =b;
+      y = b;
     }
     Int sum(Int x, Int y) { ## method name starts with lower case letter
       Int result = x +y;
@@ -32,8 +32,8 @@ class Base {
 class Main {
     
     Int main(){
-
-   
-       return 0;
+        
+        Base obj1;      ##what if I just do this?
+        return 0;
     }
 };
