@@ -5,17 +5,17 @@ class Main {
     
     void print_array(Int zerocnt, Int onecnt, Int twocnt){
       
-      for(Int i =0; i<zerocnt; i++){
+      for(Int i =0; i<zerocnt; i=i+1){
         ## Scope of i would be in this braces.
         ("0 ").put();
       }
       
       ## i doesn't exist here
       
-      for(Int i =0; i<onecnt; i++){
+      for(Int i =0; i<onecnt; i=i+1){
         ("1 ").put();
       }
-      for(Int i =0; i<twocnt; i++){
+      for(Int i =0; i<twocnt; i=i+1){
         ("2 ").put();
       }
       "\n".put();
@@ -41,11 +41,11 @@ class Main {
             
             if(array[i] == 0){
               cnt0 = cnt0 + 1;
-            }else if(array[i] == 1){
+            }else {if(array[i] == 1){
               cnt1 = cnt1 + 1;
             }else {
             cnt2 = cnt2 +1;
-            }
+            }}
         }
 
         print_array(cnt0, cnt1, cnt2); ## calling 'print_array' function
