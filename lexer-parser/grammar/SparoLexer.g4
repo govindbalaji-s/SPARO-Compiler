@@ -92,10 +92,6 @@ tokens{
           temp += '\f';
         else if (c1 == 'n')
           temp += '\n';
-        else if (c1 == '"')
-          temp += '\"';
-        else if (c1 == '\\')
-          temp += '\\';
         else
           temp += c1;
         i++;
