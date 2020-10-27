@@ -3,8 +3,13 @@
 
 class Base {
     Int x; ## Member name starts with lower case letter 
+    Int y;
     construct(Int a) after() {
       x = a;
+    }
+    construct(Int a, Int b) after() {
+      x = a;
+      y =b;
     }
     Int sum(Int x, Int y) { ## method name starts with lower case letter
       Int result = x +y;
