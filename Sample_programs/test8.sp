@@ -24,12 +24,15 @@ class Main{
         }
 
         ##What all types does '>' allow to compare? Does it return a bool type? Is the below comparison valid?
+        ## Below comparison is not vlaid, Type mismatch between 'Bool' and 'Int'
+        #*
         if (d > c > b > a){    
             "TRUE".put(); 
         }
         else{
             "FALSE".put(); 
         }
+        *#
 
         return 0; 
     }
