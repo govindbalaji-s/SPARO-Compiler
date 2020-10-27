@@ -6,11 +6,11 @@ class Main {
     void print_array(Int zerocnt, Int onecnt, Int twocnt){
       
       for(Int i =0; i<zerocnt; i=i+1){
-        ## Scope of i would be in this braces.
+        ## Scope of 'i' would be within these braces.
         ("0 ").put();
       }
       
-      ## i doesn't exist here
+      ##Previously declared 'i' doesn't exist here
       
       for(Int i =0; i<onecnt; i=i+1){
         ("1 ").put();
@@ -41,11 +41,16 @@ class Main {
             
             if(array[i] == 0){
               cnt0 = cnt0 + 1;
-            }else {if(array[i] == 1){
-              cnt1 = cnt1 + 1;
-            }else {
-            cnt2 = cnt2 +1;
-            }}
+            }
+            ##Nested 'else -if' has to be written as below
+            else{
+                if(array[i] == 1){
+                    cnt1 = cnt1 + 1;
+                }
+                else {
+                    cnt2 = cnt2 +1;
+                }
+           }
         }
 
         print_array(cnt0, cnt1, cnt2); ## calling 'print_array' function
