@@ -5,7 +5,7 @@ class Main {
     
     Int max;                    ##'max' declared,  will be null_ptr
 
-    Int findMax(Array<Int, 10> local_arr) { ##Do we need to specify Array length in the parameter?
+    Int findMax(Array<Int, 10> local_arr) { ##Need to specify Array length in the parameter.
 
         max = local_arr[0].copy();
         for(Int i = 0; i < 10; i = i+1){
