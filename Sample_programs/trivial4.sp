@@ -30,5 +30,8 @@ class Main {
         Base obj2 = new_unique Derived(4, 5);
         obj2.print();    ##Uses the print function defined in Derived class, as it overrides the one defined in Base class.
         obj1.print();       ##print function of Derived Class is called
+        
+        
+        return 0;
     }
 };
