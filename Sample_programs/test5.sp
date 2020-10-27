@@ -47,7 +47,7 @@ class Main {
                 if(array[i] == 1){
                     cnt1 = cnt1 + 1;
                 }
-                else {
+                else{
                     cnt2 = cnt2 +1;
                 }
            }
