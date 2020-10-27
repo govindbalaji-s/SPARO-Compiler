@@ -6,6 +6,10 @@ Install antlr-4.7.1-complete.jar into /usr/local/lib.
 $ cd lexer-parser
 $ make
 ```
+
+If you don't have antlr-4.7.1 , get it from following:
+https://github.com/antlr/antlr4/blob/master/doc/getting-started.md
+
 To test the lexer-parser:
 ```
 $ cd lexer-parser/test
