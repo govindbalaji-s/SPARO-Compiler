@@ -16,6 +16,7 @@ class Base {
       return result;
     }
     
+    #*This also can be called as overloading as compiler is able to distinguish which sum to call. Can we think on this ?*#
     Float sum(Float x, Float y) {
       Float result = x + y;
       return result;
