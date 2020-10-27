@@ -4,6 +4,7 @@ class Main {
     
     Int main(){
     
+        ("Hello world!!").put();
         Int x = 0;         ##same as 'Int x = new_unique Int();'
         Int y = 9;         ##same as 'Int y = new_unique Int(9);'
         Int z = x+y;
