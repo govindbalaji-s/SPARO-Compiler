@@ -7,7 +7,7 @@ class Main {
         ##("This will not be printed").put();
         
         #*
-        ("This also will not be printed").put();
+        ("This will also not be printed").put();
         *#
         
         ("This will be printed").put();
