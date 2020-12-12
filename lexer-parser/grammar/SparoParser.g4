@@ -13,7 +13,7 @@ class_definition:
   class_head LBRACE member_list? RBRACE SEMICOLON;
 
 class_head:
-  CLASS TYPEID base_clause?;
+  CLASS typeid=TYPEID base_clause?;
 
 base_clause:
   EXTENDS type_specifier;

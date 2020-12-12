@@ -115,14 +115,6 @@ public class SparoLexer extends Lexer {
 	    Token t = _factory.create(_tokenFactorySourcePair, _type, _text, _channel, _tokenStartCharIndex, getCharIndex()-1, _tokenStartLine, _tokenStartCharPositionInLine);
 	    String text = t.getText();
 
-	    //write your code to test strings here
-
-	    if (text.charAt(0) == '\n')
-	    {
-	      reportError("Unterminated string constant");
-	      return;
-	    }
-
 	    String temp = "";
 	    for(int i = 0; i < text.length(); i++)
 	    {
@@ -138,10 +130,6 @@ public class SparoLexer extends Lexer {
 	          temp += '\f';
 	        else if (c1 == 'n')
 	          temp += '\n';
-	        else if (c1 == '"')
-	          temp += '\"';
-	        else if (c1 == '\\')
-	          temp += '\\';
 	        else
 	          temp += c1;
 	        i++;
@@ -150,16 +138,8 @@ public class SparoLexer extends Lexer {
 	        temp += c0;
 	    }
 
-	    if (temp.length() > 1024)
-	    {
-	      reportError("String constant too long");
-	      return;
-	    }
-	    else
-	    {
-	      setText(temp);
-	      return;
-	    }
+	    setText(temp);
+	    return;
 	  }
 
 	  public void unk_token() {

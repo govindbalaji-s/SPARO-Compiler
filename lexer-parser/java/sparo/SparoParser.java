@@ -307,6 +307,7 @@ public class SparoParser extends Parser {
 	}
 
 	public static class Class_headContext extends ParserRuleContext {
+		public Token typeid;
 		public TerminalNode CLASS() { return getToken(SparoParser.CLASS, 0); }
 		public TerminalNode TYPEID() { return getToken(SparoParser.TYPEID, 0); }
 		public Base_clauseContext base_clause() {
@@ -333,7 +334,7 @@ public class SparoParser extends Parser {
 			setState(113);
 			match(CLASS);
 			setState(114);
-			match(TYPEID);
+			((Class_headContext)_localctx).typeid = match(TYPEID);
 			setState(116);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
