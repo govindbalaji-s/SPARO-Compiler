@@ -1,5 +1,17 @@
 package sparo;
+
 import java.util.*;
+import java.util.Map.Entry;
+
+import sparo.SparoParser.Class_definitionContext;
+import sparo.SparoParser.Class_definition_listContext;
+import sparo.SparoParser.Declaration_specifierContext;
+import sparo.SparoParser.MemberContext;
+import sparo.SparoParser.Member_listContext;
+import sparo.SparoParser.Parameter_declarationContext;
+import sparo.SparoParser.Parameter_declaration_listContext;
+import sparo.SparoParser.Pointer_typeContext;
+import sparo.SparoParser.ProgramContext;
 
 class Semantic {
   private boolean errorFlag = false;
@@ -8,11 +20,18 @@ class Semantic {
     return errorFlag;
   }
   HashMap<Integer,Integer> inheritanceGraph = new HashMap<>();
+  HashMap<String, ClassInfo> classTable = new HashMap<String, ClassInfo>();
+
   public Semantic(SparoParser.ProgramContext prgctx) {
     addBuiltInClasses();
     printAllClasses(prgctx.class_definition_list());
     genInheritanceGraph(prgctx.class_definition_list());
     checkcycle(inheritanceGraph);
+
+
+    buildClassTable(prgctx);
+    //check types, build symbol table etc
+    // traverseProgram(prgctx);
   }
   
   Set<String> classnames = new HashSet<String>();
@@ -121,6 +140,70 @@ class Semantic {
 	}
  }
  
+public void buildClassTable(ProgramContext prgctx) {
+  Class_definition_listContext ctx = prgctx.class_definition_list();
+  while(ctx != null) {
+    buildClassTable(ctx.class_definition());
+    ctx = ctx.class_definition_list();
+  }
+
+  //PRINT CLASSTABLE
+  classTable.forEach((cname, ci) -> {
+    System.out.println("Class name: " + cname);
+    System.out.println("Constructors:");
+    ci.ctorList.forEach(mi -> System.out.println(mi.toString()));
+    System.out.println("Members:");
+    ci.memberList.forEach(vi -> System.out.println(vi.toString()));
+    System.out.println("Methods:");
+    ci.methodList.forEach(mi  -> System.out.println(mi.toString()));
+    System.out.println("-----------------------------");
+  });
+
+}
+
+public void buildClassTable(Class_definitionContext cdctx) {
+  String cname = cdctx.class_head().typeid.getText();
+  String pname = getKeyByValue(classNum, inheritanceGraph.get(cname));
+  ClassInfo ci = new ClassInfo(cname, pname);
+
+  var mlctx = cdctx.member_list();
+  while(mlctx != null) {
+    MemberContext mtx = mlctx.member();
+    if(mtx.member_declaration() != null) {
+      Type t = getType(mtx.member_declaration().declaration_specifier());
+      String n = mtx.member_declaration().OBJECTID().getText();
+      ci.memberList.add(new VariableInfo(t, n));
+    }
+    else if(mtx.method_definition() != null) {
+      Type rt = getType(mtx.method_definition().declaration_specifier());
+      String n = mtx.method_definition().OBJECTID().getText();
+      var ptypes = getPTypes(mtx.method_definition().parameter_declaration_list());
+      ci.methodList.add(new MethodInfo(n, rt, ptypes));
+    }
+    else if(mtx.constructor() != null) {
+      var ptypes = getPTypes(mtx.constructor().parameter_declaration_list());
+      ci.ctorList.add(new MethodInfo("construct", null, ptypes));
+    }
+
+    mlctx = mlctx.member_list();
+  }
+  classTable.put(cname, ci);
+}
+
+ public void traverseProgram(SparoParser.ProgramContext prgctx) {
+   SparoParser.Class_definition_listContext ctx = prgctx.class_definition_list();
+   while(ctx != null) {
+     traverseClassDefinition(ctx.class_definition());
+     ctx = ctx.class_definition_list();
+   }
+ }
+
+ public void traverseClassDefinition(SparoParser.Class_definitionContext ctx) {
+   SparoParser.Member_listContext mtx = ctx.member_list();
+   while(mtx != null) {
+     //traverse
+   }
+ }
 
 	  
   public void print(){
@@ -135,4 +218,32 @@ class Semantic {
 		
     System.out.println("Hello");
   }
+
+  public Type getType(Declaration_specifierContext ctx) {
+    Pointer_typeContext ptrctx = ctx.pointer_type();
+    Type.PointerType ptr = Type.PointerType.unique;
+    if(ptrctx != null)
+      ptr = Type.PointerType.valueOf(ptrctx.getText());
+    return new Type(ptr, ctx.type_specifier().getText());
+  }
+
+  public ArrayList<Type> getPTypes(Parameter_declaration_listContext pdlctx) {
+    ArrayList<Type> ptypes = new ArrayList<Type>();
+
+    while(pdlctx != null) {
+      Type t = getType(pdlctx.parameter_declaration().declaration_specifier());
+      ptypes.add(t);
+      pdlctx = pdlctx.parameter_declaration_list();
+    }
+    return ptypes;
+  }
+
+  public static <T, E> T getKeyByValue(Map<T, E> map, E value) {
+    for (Entry<T, E> entry : map.entrySet()) {
+        if (Objects.equals(value, entry.getValue())) {
+            return entry.getKey();
+        }
+    }
+    return null;
+}
 }
