@@ -7,51 +7,65 @@ class Semantic {
   public boolean getErrorFlag() {
     return errorFlag;
   }
-  HashMap<Integer,Integer> graph = new HashMap<>();
+  HashMap<Integer,Integer> inheritanceGraph = new HashMap<>();
   public Semantic(SparoParser.ProgramContext prgctx) {
+    addBuiltInClasses();
     printAllClasses(prgctx.class_definition_list());
-    Graph(prgctx.class_definition_list());
-    checkcycle(graph);
+    genInheritanceGraph(prgctx.class_definition_list());
+    checkcycle(inheritanceGraph);
   }
   
   Set<String> classnames = new HashSet<String>();
-  HashMap<String, Integer> map = new HashMap<>();
-  Integer i=0;
-  Integer graphsize=0;
+  HashMap<String, Integer> classNum = new HashMap<>();
+
+  public void addBuiltInClasses() {
+    String builtins[] = {"Object", "Int", "Float", "Bool", "String", "Array", "Tensor"};
+    for(String cls : builtins) {
+      classnames.add(cls);
+      classNum.put(cls, classnames.size()-1);
+      System.out.println(cls+" " +(classnames.size()-1)+"\n");
+
+      if(!cls.equals("Object"))
+        inheritanceGraph.put(classNum.get(cls), classNum.get("Object"));
+    }
+  }
+
   public void printAllClasses(SparoParser.Class_definition_listContext ctx) {
     if(ctx == null)
       return;
     String temp = ctx.class_definition().class_head().TYPEID().getText();
     System.out.println(ctx.class_definition().class_head().TYPEID());
+
     if(classnames.contains(temp)== false){
-		classnames.add(temp);
-		System.out.println(temp+" " +i+"\n");
-		map.put(temp,i);
-		i++;
-	}
-	else
-	{
-		System.out.println(temp+" class already exists");
-	}
-		
+      classnames.add(temp);
+      System.out.println(temp+" " +(classnames.size()-1)+"\n");
+      classNum.put(temp,classnames.size()-1);
+    }
+    else
+    {
+      System.out.println(temp+" class already exists");
+    }
+      
     printAllClasses(ctx.class_definition_list());
-    graphsize=i;
   }
 
   
-  public void Graph(SparoParser.Class_definition_listContext ctx){
+  public void genInheritanceGraph(SparoParser.Class_definition_listContext ctx){
 	  if(ctx == null)
-	  return;
-	  if(ctx.class_definition().class_head().base_clause()!=null)
-	  {
-	     String node_a = ctx.class_definition().class_head().TYPEID().getText();
-	     String node_b = ctx.class_definition().class_head().base_clause().type_specifier().TYPEID().getText();
-	     int a = map.get(node_a);
-	     int b = map.get(node_b);
-	     graph.put(a,b);
-      }
-      Graph(ctx.class_definition_list());    
-	  }
+    return;
+    String node_a = ctx.class_definition().class_head().TYPEID().getText();
+
+    //Default parent class is Object
+    String node_b = "Object";
+    if(ctx.class_definition().class_head().base_clause()!=null)
+      node_b = ctx.class_definition().class_head().base_clause().type_specifier().TYPEID().getText();
+    
+      int a = classNum.get(node_a);
+    int b = classNum.get(node_b);
+    inheritanceGraph.put(a,b);
+
+    genInheritanceGraph(ctx.class_definition_list());    
+	}
 	
  int flag=0;  
  public void checkcycle( HashMap<Integer,Integer> graph)
@@ -60,7 +74,7 @@ class Semantic {
 	  Set<Integer> visited = new HashSet<Integer>();
 
 	 
-	 for(int i=0;i<graphsize;i++)
+	 for(int i=0;i<classnames.size();i++)
 	 {
 		 if(flag==1)
 		 {
@@ -110,11 +124,11 @@ class Semantic {
 
 	  
   public void print(){
-	for(int i=0;i<graphsize;i++)
+	for(int i=0;i<classnames.size();i++)
 	{
-		if(graph.containsKey(i)==true)
+		if(inheritanceGraph.containsKey(i)==true)
 		{
-			int b = graph.get(i);
+			int b = inheritanceGraph.get(i);
 			System.out.println(i+" "+b+"\n");
 		}
 	}
