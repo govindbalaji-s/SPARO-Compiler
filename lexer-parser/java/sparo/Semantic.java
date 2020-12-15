@@ -146,16 +146,38 @@ public void buildClassTable(ProgramContext prgctx) {
     buildClassTable(ctx.class_definition());
     ctx = ctx.class_definition_list();
   }
+  
 
   //PRINT CLASSTABLE
   classTable.forEach((cname, ci) -> {
+	  Set<String> membercheck = new HashSet<String>(); 
+	  Set<String> methodcheck = new HashSet<String>();
     System.out.println("Class name: " + cname);
     System.out.println("Constructors:");
     ci.ctorList.forEach(mi -> System.out.println(mi.toString()));
     System.out.println("Members:");
     ci.memberList.forEach(vi -> System.out.println(vi.toString()));
+    for(var x : ci.memberList)
+    {
+		String y = x.toString();
+		if(membercheck.contains(y)==true)
+		{
+			System.out.println(y+" member already exists\n");
+		}
+		membercheck.add(y);
+	}
     System.out.println("Methods:");
     ci.methodList.forEach(mi  -> System.out.println(mi.toString()));
+    for(var x : ci.methodList)
+    {
+		String y = x.toString();
+		if(methodcheck.contains(y)==true)
+		{
+			String temp= x.tostring();
+			System.out.println("\n"+temp+"method already exists\n");
+		}
+		methodcheck.add(y);
+	}
     System.out.println("-----------------------------");
   });
 
