@@ -33,4 +33,7 @@ public class MethodInfo extends SymbolInfo {
             "\nReturn type:" + retType.toString() +
             "\nParam types:" + paramTypes.toString();
     }
+    public String tostring(){
+    return name;
+}
 }
