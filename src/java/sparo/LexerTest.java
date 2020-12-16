@@ -24,7 +24,7 @@ public class LexerTest {
 
 	static int EOF_TYPEID = -1;
 
-/*	public static void main(String args[]) {
+	public static void main(String args[]) {
 
 		if(args.length < 1) {
 			System.err.println("No files given");
@@ -34,7 +34,7 @@ public class LexerTest {
 		for(String filename : args)
 			printTokenStream(filename);
 	}
-*/
+
 	static String escapeSpecialCharacters(String text) {
 		return
 			text

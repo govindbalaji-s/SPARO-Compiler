@@ -2,6 +2,8 @@ package sparo;
 
 import java.util.*;
 import java.util.Map.Entry;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import sparo.SparoParser.Class_definitionContext;
 import sparo.SparoParser.Class_definition_listContext;
@@ -15,6 +17,7 @@ import sparo.SparoParser.ProgramContext;
 
 class Semantic {
   private boolean errorFlag = false;
+  private FileWriter fw = new FileWriter("semanticlogs.txt");
 
   public boolean getErrorFlag() {
     return errorFlag;
@@ -22,7 +25,7 @@ class Semantic {
   HashMap<Integer,Integer> inheritanceGraph = new HashMap<>();
   HashMap<String, ClassInfo> classTable = new HashMap<String, ClassInfo>();
 
-  public Semantic(SparoParser.ProgramContext prgctx) {
+  public Semantic(SparoParser.ProgramContext prgctx) throws IOException {
     addBuiltInClasses();
     printAllClasses(prgctx.class_definition_list());
     genInheritanceGraph(prgctx.class_definition_list());
@@ -30,6 +33,7 @@ class Semantic {
 
 
     buildClassTable(prgctx);
+    fw.close();
     //check types, build symbol table etc
     // traverseProgram(prgctx);
   }
@@ -37,23 +41,23 @@ class Semantic {
   Set<String> classnames = new HashSet<String>();
   HashMap<String, Integer> classNum = new HashMap<>();
 
-  public void addBuiltInClasses() {
+  public void addBuiltInClasses() throws IOException{
     String builtins[] = {"Object", "Int", "Float", "Bool", "String", "Array", "Tensor"};
     for(String cls : builtins) {
       classnames.add(cls);
       classNum.put(cls, classnames.size()-1);
-      // System.out.println(cls+" " +(classnames.size()-1)+"\n");
+      // fw.write(cls+" " +(classnames.size()-1)+"\n");
 
       if(!cls.equals("Object"))
         inheritanceGraph.put(classNum.get(cls), classNum.get("Object"));
     }
   }
 
-  public void printAllClasses(SparoParser.Class_definition_listContext ctx) {
+  public void printAllClasses(SparoParser.Class_definition_listContext ctx) throws IOException{
     if(ctx == null)
       return;
     String temp = ctx.class_definition().class_head().TYPEID().getText();
-    // System.out.println(ctx.class_definition().class_head().TYPEID());
+    // fw.write(ctx.class_definition().class_head().TYPEID());
 
     if(classnames.contains(temp)== false){
       classnames.add(temp);
@@ -70,7 +74,7 @@ class Semantic {
   }
 
   
-  public void genInheritanceGraph(SparoParser.Class_definition_listContext ctx){
+  public void genInheritanceGraph(SparoParser.Class_definition_listContext ctx) throws IOException {
 	  if(ctx == null)
     return;
     String node_a = ctx.class_definition().class_head().TYPEID().getText();
@@ -88,7 +92,7 @@ class Semantic {
 	}
 	
  int flag=0;  
- public void checkcycle( HashMap<Integer,Integer> graph)
+ public void checkcycle( HashMap<Integer,Integer> graph) throws IOException
  {
 	 Set<Integer> stack = new HashSet<Integer>();
 	  Set<Integer> visited = new HashSet<Integer>();
@@ -111,8 +115,7 @@ class Semantic {
 	 }
 	 else
 	 {
-		//  System.out.println("Cycle is not present\n");
-		 
+		fw.write("Cycle is not present\n");
 	 }
 	 
  }
@@ -141,7 +144,7 @@ class Semantic {
 	}
  }
  
-public void buildClassTable(ProgramContext prgctx) {
+public void buildClassTable(ProgramContext prgctx) throws IOException{
   Class_definition_listContext ctx = prgctx.class_definition_list();
   while(ctx != null) {
     buildClassTable(ctx.class_definition());
@@ -151,24 +154,26 @@ public void buildClassTable(ProgramContext prgctx) {
 
   //PRINT CLASSTABLE
   classTable.forEach((cname, ci) -> {
+    try{
 	  Set<String> membercheck = new HashSet<String>(); 
 	  Set<String> methodcheck = new HashSet<String>();
-    // System.out.println("Class name: " + cname);
-    // System.out.println("Constructors:");
-    // ci.ctorList.forEach(mi -> System.out.println(mi.toString()));
-    // System.out.println("Members:");
-    // ci.memberList.forEach(vi -> System.out.println(vi.toString()));
+    fw.write("Class name: " + cname + "\n");
+    fw.write("--Constructors:\n");
+    
+    ci.ctorList.forEach(mi -> {try{fw.write("\n"+mi.toString()+"\n");}catch(Exception e){}});
+    fw.write("\n--Members:\n");
+    ci.memberList.forEach(vi -> {try{fw.write(vi.toString()+"\n");}catch(Exception e){}});
     for(var x : ci.memberList)
     {
-		String y = x.name;
-		if(membercheck.contains(y)==true)
-		{
-			System.out.println(x.lineNo + ": " + y+" member already exists\n");
-		}
-		membercheck.add(y);
+      String y = x.name;
+      if(membercheck.contains(y)==true)
+      {
+        System.out.println(x.lineNo + ": " + y+" member already exists\n");
+      }
+      membercheck.add(y);
 	}
-    // System.out.println("Methods:");
-    // ci.methodList.forEach(mi  -> System.out.println(mi.toString()));
+    fw.write("\n--Methods:\n");
+    ci.methodList.forEach(mi  -> {try{fw.write("\n"+mi.toString()+"\n");}catch(Exception e){}});
     for(var x : ci.methodList)
     {
 		String y = x.name;
@@ -179,12 +184,12 @@ public void buildClassTable(ProgramContext prgctx) {
 		}
 		methodcheck.add(y);
 	}
-    // System.out.println("-----------------------------");
-  });
-
+    fw.write("-----------------------------\n\n");
+    ;}catch(Exception e){}
+  });  
 }
 
-public void buildClassTable(Class_definitionContext cdctx) {
+public void buildClassTable(Class_definitionContext cdctx){
   String cname = cdctx.class_head().typeid.getText();
   String pname = getKeyByValue(classNum, inheritanceGraph.get(cname));
   ClassInfo ci = new ClassInfo(cname, pname, cdctx.class_head().TYPEID().getSymbol().getLine());

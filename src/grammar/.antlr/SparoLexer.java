@@ -1,4 +1,4 @@
-// Generated from /home/govind/Documents/sem5/cs3423/SPARO-Compiler/lexer-parser/grammar/SparoLexer.g4 by ANTLR 4.8
+// Generated from /home/govind/Documents/sem5/cs3423/SPARO-Compiler/src/grammar/SparoLexer.g4 by ANTLR 4.8
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.Token;
