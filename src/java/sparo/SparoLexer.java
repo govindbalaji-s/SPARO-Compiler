@@ -185,6 +185,9 @@ public class SparoLexer extends Lexer {
 		case 63:
 			UNMATCH_COM_action((RuleContext)_localctx, actionIndex);
 			break;
+		case 64:
+			EOF_COM_action((RuleContext)_localctx, actionIndex);
+			break;
 		case 65:
 			UNKNOWN_action((RuleContext)_localctx, actionIndex);
 			break;
@@ -223,16 +226,23 @@ public class SparoLexer extends Lexer {
 			break;
 		}
 	}
-	private void UNKNOWN_action(RuleContext _localctx, int actionIndex) {
+	private void EOF_COM_action(RuleContext _localctx, int actionIndex) {
 		switch (actionIndex) {
 		case 7:
+			reportError("EOF in comments"); 
+			break;
+		}
+	}
+	private void UNKNOWN_action(RuleContext _localctx, int actionIndex) {
+		switch (actionIndex) {
+		case 8:
 			 unk_token(); 
 			break;
 		}
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\2C\u0218\b\1\4\2\t"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\2C\u0219\b\1\4\2\t"+
 		"\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13"+
 		"\t\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"+
@@ -265,12 +275,12 @@ public class SparoLexer extends Lexer {
 		"=\u01df\13=\3>\6>\u01e2\n>\r>\16>\u01e3\3>\3>\3?\3?\3?\3?\7?\u01ec\n?"+
 		"\f?\16?\u01ef\13?\3?\5?\u01f2\n?\3?\3?\3@\3@\3@\3@\7@\u01fa\n@\f@\16@"+
 		"\u01fd\13@\3@\3@\3@\3@\3@\3A\3A\3A\3A\3A\3B\3B\3B\3B\3B\3B\7B\u020f\n"+
-		"B\fB\16B\u0212\13B\3B\3B\3C\3C\3C\4\u01ed\u01fb\2D\3\6\5\7\7\b\t\2\13"+
-		"\2\r\t\17=\21\20\23\21\25\22\27\23\31\32\33\24\35\25\37\26!\27#\30%\31"+
-		"\'\33)\34+\35-\36/\37\61 \63!\65\"\67#9$;%=&?\'A(C)E*G+I,K-M.O/Q\60S\61"+
-		"U\62W\63Y\64[\65]\66_\67a8c9e:g;i<k\nm\13o\rq\fs\16u\17w\5y\4{>}?\177"+
-		"@\u0081A\u0083B\u0085C\3\2\r\3\2\62;\3\2\2\2\6\2\2\2\f\f$$^^\4\3\f\f$"+
-		"$\3\2c|\6\2\62;C\\aac|\3\2C\\\4\2\13\17\"\"\3\3\f\f\3\2,,\3\2%%\2\u022b"+
+		"B\fB\16B\u0212\13B\3B\3B\3B\3C\3C\3C\4\u01ed\u01fb\2D\3\6\5\7\7\b\t\2"+
+		"\13\2\r\t\17=\21\20\23\21\25\22\27\23\31\32\33\24\35\25\37\26!\27#\30"+
+		"%\31\'\33)\34+\35-\36/\37\61 \63!\65\"\67#9$;%=&?\'A(C)E*G+I,K-M.O/Q\60"+
+		"S\61U\62W\63Y\64[\65]\66_\67a8c9e:g;i<k\nm\13o\rq\fs\16u\17w\5y\4{>}?"+
+		"\177@\u0081A\u0083B\u0085C\3\2\r\3\2\62;\3\2\2\2\6\2\2\2\f\f$$^^\4\3\f"+
+		"\f$$\3\2c|\6\2\62;C\\aac|\3\2C\\\4\2\13\17\"\"\3\3\f\f\3\2,,\3\2%%\2\u022c"+
 		"\2\3\3\2\2\2\2\5\3\2\2\2\2\7\3\2\2\2\2\r\3\2\2\2\2\17\3\2\2\2\2\21\3\2"+
 		"\2\2\2\23\3\2\2\2\2\25\3\2\2\2\2\27\3\2\2\2\2\31\3\2\2\2\2\33\3\2\2\2"+
 		"\2\35\3\2\2\2\2\37\3\2\2\2\2!\3\2\2\2\2#\3\2\2\2\2%\3\2\2\2\2\'\3\2\2"+
@@ -296,7 +306,7 @@ public class SparoLexer extends Lexer {
 		"\u01a3\3\2\2\2i\u01a8\3\2\2\2k\u01af\3\2\2\2m\u01b3\3\2\2\2o\u01b9\3\2"+
 		"\2\2q\u01be\3\2\2\2s\u01c5\3\2\2\2u\u01cb\3\2\2\2w\u01d2\3\2\2\2y\u01d9"+
 		"\3\2\2\2{\u01e1\3\2\2\2}\u01e7\3\2\2\2\177\u01f5\3\2\2\2\u0081\u0203\3"+
-		"\2\2\2\u0083\u0208\3\2\2\2\u0085\u0215\3\2\2\2\u0087\u0088\7v\2\2\u0088"+
+		"\2\2\2\u0083\u0208\3\2\2\2\u0085\u0216\3\2\2\2\u0087\u0088\7v\2\2\u0088"+
 		"\u0089\7t\2\2\u0089\u008a\7w\2\2\u008a\u0091\7g\2\2\u008b\u008c\7h\2\2"+
 		"\u008c\u008d\7c\2\2\u008d\u008e\7n\2\2\u008e\u008f\7u\2\2\u008f\u0091"+
 		"\7g\2\2\u0090\u0087\3\2\2\2\u0090\u008b\3\2\2\2\u0091\4\3\2\2\2\u0092"+
@@ -408,11 +418,11 @@ public class SparoLexer extends Lexer {
 		"\u0210\3\2\2\2\u020b\u020f\n\13\2\2\u020c\u020d\7,\2\2\u020d\u020f\n\f"+
 		"\2\2\u020e\u020b\3\2\2\2\u020e\u020c\3\2\2\2\u020f\u0212\3\2\2\2\u0210"+
 		"\u020e\3\2\2\2\u0210\u0211\3\2\2\2\u0211\u0213\3\2\2\2\u0212\u0210\3\2"+
-		"\2\2\u0213\u0214\7\2\2\3\u0214\u0084\3\2\2\2\u0215\u0216\13\2\2\2\u0216"+
-		"\u0217\bC\n\2\u0217\u0086\3\2\2\2\31\2\u0090\u0093\u0098\u009b\u00a0\u00a6"+
-		"\u00ab\u00ad\u00b3\u00c7\u00cc\u00da\u00df\u00ee\u01d6\u01dd\u01e3\u01ed"+
-		"\u01f1\u01fb\u020e\u0210\13\3\7\2\3\b\3\3\b\4\3\b\5\3\b\6\3\b\7\b\2\2"+
-		"\3A\b\3C\t";
+		"\2\2\u0213\u0214\7\2\2\3\u0214\u0215\bB\n\2\u0215\u0084\3\2\2\2\u0216"+
+		"\u0217\13\2\2\2\u0217\u0218\bC\13\2\u0218\u0086\3\2\2\2\31\2\u0090\u0093"+
+		"\u0098\u009b\u00a0\u00a6\u00ab\u00ad\u00b3\u00c7\u00cc\u00da\u00df\u00ee"+
+		"\u01d6\u01dd\u01e3\u01ed\u01f1\u01fb\u020e\u0210\f\3\7\2\3\b\3\3\b\4\3"+
+		"\b\5\3\b\6\3\b\7\b\2\2\3A\b\3B\t\3C\n";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
