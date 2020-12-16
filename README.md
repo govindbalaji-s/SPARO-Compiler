@@ -13,6 +13,7 @@ $ make
 ```
 
 ## To test the lexer-parser:
+Comment out the main function in `SemanticTest.java` and uncomment it in `LexerTest.java`
 ```
 $ cd src/test
 $ ./auto-lexer.sh
@@ -42,3 +43,5 @@ $ java -Xmx500M -cp "/usr/local/lib/antlr-4.7.1-complete.jar:../java" org.antlr.
 $ cd src/test
 $ ./semantic.sh ../../Sample_programs/file.sp
 ```
+## Source:
+Some boilerplate files such as SemanticTest.java LexerTest.java etc, are sourced from the templates of Cool Compiler Project.
