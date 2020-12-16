@@ -107,7 +107,7 @@ class Semantic {
 	 }
 	 if(flag==1)
 	 {
-		 System.out.println("\n Cycle is present in inheritance graph \n");
+		 System.out.println("\n Class redeclaration or Cycle is present in inheritance graph \n");
 	 }
 	 else
 	 {
