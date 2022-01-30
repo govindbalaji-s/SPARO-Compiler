@@ -16,36 +16,12 @@ Return type:unique void
 Param types:[]
 -----------------------------
 
-Class name: X
---Constructors:
-
---Members:
-
---Methods:
------------------------------
-
-Class name: Y
---Constructors:
-
---Members:
-
---Methods:
------------------------------
-
 Class name: Main
 --Constructors:
 
 --Members:
 
 --Methods:
-
-MethodName:(Int)foo(String,)
-Return type:unique Int
-Param types:[unique String]
-
-MethodName:(Int)foo(Int,)
-Return type:unique Int
-Param types:[unique Int]
 
 MethodName:(Int)main()
 Return type:unique Int

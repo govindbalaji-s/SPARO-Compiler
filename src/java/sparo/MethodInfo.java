@@ -13,7 +13,7 @@ public class MethodInfo extends SymbolInfo {
         super(n);
         retType = rt;
         lineNo = ln;
-        if(retType == null)
+        if (retType == null)
             retType = new Type(PointerType.unique, "CTOR");
         paramTypes = pt;
 
@@ -21,9 +21,8 @@ public class MethodInfo extends SymbolInfo {
     }
 
     private void mangle() {
-        String newName = "(" + retType.typeName + ")" +
-                         name + "(";
-        for(Type paramType : paramTypes) {
+        String newName = "(" + retType.typeName + ")" + name + "(";
+        for (Type paramType : paramTypes) {
             newName += paramType.typeName + ",";
         }
         newName += ")";
@@ -31,11 +30,10 @@ public class MethodInfo extends SymbolInfo {
     }
 
     public String toString() {
-        return "MethodName:"+name + 
-            "\nReturn type:" + retType.toString() +
-            "\nParam types:" + paramTypes.toString();
+        return "MethodName:" + name + "\nReturn type:" + retType.toString() + "\nParam types:" + paramTypes.toString();
     }
-    public String tostring(){
-    return name;
-}
+
+    public String tostring() {
+        return name;
+    }
 }

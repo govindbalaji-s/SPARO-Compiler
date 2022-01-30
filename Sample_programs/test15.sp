@@ -1,4 +1,4 @@
-#*Testing unescaped new line in strings=#
+#*Testing unescaped new line in strings*#
 
 class Main {
     

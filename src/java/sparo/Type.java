@@ -2,10 +2,9 @@ package sparo;
 
 public class Type {
     enum PointerType {
-        unique,
-        shared,
-        weak
+        unique, shared, weak
     }
+
     public PointerType ptrType;
     public String typeName;
 

@@ -1,3 +1,4 @@
 *.swp
+*.class
 lexer-parser/java/**/*.*
 !lexer-parser/java/**/*.java
